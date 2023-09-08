@@ -79,7 +79,7 @@ class ConcurrencyRequest {
   };
 }
 
-// ---- DELETE ME ----
+// ---- UMD DELETE ME ----
 // for commonjs es5 require
 if (typeof module !== 'undefined' && module.exports && typeof wx === 'undefined') {
   module.exports = ConcurrencyRequest;
