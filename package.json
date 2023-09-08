@@ -1,6 +1,6 @@
 {
   "name": "@jswork/concurrency-request",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An efficiently handles asynchronous data requests with customizable concurrency limit.",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -52,5 +52,12 @@
       ],
       "@babel/preset-typescript"
     ]
-  }
+  },
+  "keywords": [
+    "api",
+    "asynchronous",
+    "concurrency",
+    "fetch",
+    "request"
+  ]
 }
