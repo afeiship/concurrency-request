@@ -2,6 +2,10 @@ declare var wx: any;
 
 export type ConcurrencyRequestCallback = (res: any) => void;
 export type ConcurrencyRequestResolve = (res: any[]) => void;
+export interface ConcurrencyRequestTask {
+  index: number;
+  data: any;
+}
 export interface ConcurrencyRequestOptions {
   max?: number;
   request: (options, callback: ConcurrencyRequestCallback) => void;
@@ -18,8 +22,8 @@ class ConcurrencyRequest {
 
   /* --- core data --- */
   private result: any[];
-  private restPool: any[];
-  private workPool: any[];
+  private restPool: ConcurrencyRequestTask[];
+  private workPool: ConcurrencyRequestTask[];
 
   get tasks() {
     return this.dataList.map((data, index) => {
@@ -51,7 +55,7 @@ class ConcurrencyRequest {
     this.workPool.forEach((task) => this.process(task, this.next));
   }
 
-  process(task, callback) {
+  process(task: ConcurrencyRequestTask, callback) {
     this.options.request(task, (res) => {
       this.result[task.index] = res;
       callback();
