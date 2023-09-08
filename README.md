@@ -20,8 +20,19 @@ for (let i = 1; i <= 10; i++) {
   urls.push(`https://jsonplaceholder.typicode.com/todos/${i}`);
 }
 
-ConcurrencyRequest.start(urls, 3).then((res) => {
-  console.log("res: ", res);
+function request(opts, callback) {
+  fetch(opts.data)
+    .then((r) => r.json())
+    .then((data) => {
+      callback({ success: true, data });
+    })
+    .catch((data) => {
+      callback({ success: false, data });
+    });
+}
+
+ConcurrencyRequest.start(urls, { max: 3, request }).then((res) => {
+  console.log(res);
 });
 ```
 
