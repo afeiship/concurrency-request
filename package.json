@@ -1,6 +1,6 @@
 {
   "name": "@jswork/concurrency-request",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "An efficiently handles asynchronous data requests with customizable concurrency limit.",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
