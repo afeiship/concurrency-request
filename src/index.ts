@@ -1,12 +1,13 @@
 declare var wx: any;
 
-export type ConcurrencyRequestCallback = (res: any) => void;
-export type ConcurrencyRequestResolve = (res: any[]) => void;
-export interface ConcurrencyRequestTask {
+// 这些 type exprot 的时候，如果导出 umd 会导致 umd 包2层，所以这里不导出
+type ConcurrencyRequestCallback = (res: any) => void;
+type ConcurrencyRequestResolve = (res: any[]) => void;
+interface ConcurrencyRequestTask {
   index: number;
   data: any;
 }
-export interface ConcurrencyRequestOptions {
+interface ConcurrencyRequestOptions {
   max?: number;
   request: (options, callback: ConcurrencyRequestCallback) => void;
 }
@@ -77,10 +78,3 @@ class ConcurrencyRequest {
     if (task) this.process(task, this.next);
   };
 }
-
-// for commonjs es5 require
-if (typeof module !== 'undefined' && module.exports && typeof wx === 'undefined') {
-  module.exports = ConcurrencyRequest;
-}
-
-export default ConcurrencyRequest;
