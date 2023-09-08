@@ -2,8 +2,13 @@ const gulp = require('gulp');
 const { CleanRegistry, TsScripts } = require('@jswork/gulp-registry');
 
 const task1 = new CleanRegistry();
-const task2 = new TsScripts();
+const task2 = new TsScripts({
+  umdOptions: {
+    exports: () => 'ConcurrencyRequest',
+    namespace: () => 'ConcurrencyRequest',
+  },
+});
 
 [task1, task2].forEach(gulp.registry);
 
-gulp.task('default', gulp.series(['clean', 'ts:scripts']));
+gulp.task('default', gulp.series(['clean', 'ts:scripts', 'ts:scripts:umd']));
