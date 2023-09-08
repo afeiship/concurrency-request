@@ -55,19 +55,19 @@ class ConcurrencyRequest {
     this.workPool.forEach((task) => this.process(task, this.next));
   }
 
-  process(task: ConcurrencyRequestTask, callback) {
-    this.options.request(task, (res) => {
-      this.result[task.index] = res;
+  process(inTask: ConcurrencyRequestTask, callback) {
+    this.options.request(inTask, (res) => {
+      this.result[inTask.index] = res;
       callback();
     });
   }
 
-  listen(callback) {
+  listen(inCallback: ConcurrencyRequestCallback) {
     const timerId = setInterval(() => {
       const done = this.result.filter(Boolean).length === this.tasks.length;
       if (done) {
         clearInterval(timerId);
-        callback(this.result);
+        inCallback(this.result);
       }
     }, 100);
   }
