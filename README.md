@@ -13,9 +13,16 @@ npm install @jswork/concurrency-request
 
 ## usage
 ```js
-import concurrencyRequest from '@jswork/concurrency-request';
+import ConcurrencyRequest from '@jswork/concurrency-request';
 
-// usage goes here.
+const urls = [];
+for (let i = 1; i <= 10; i++) {
+  urls.push(`https://jsonplaceholder.typicode.com/todos/${i}`);
+}
+
+ConcurrencyRequest.start(urls, 3).then((res) => {
+  console.log("res: ", res);
+});
 ```
 
 ## license
