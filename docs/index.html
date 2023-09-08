@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>App for cr</title>
+    <script src="https://cdn.jsdelivr.net/npm/@jswork/concurrency-request"></script>
+  </head>
+  <body>
+    <script>
+      const urls = [];
+      for (let i = 1; i <= 10; i++) {
+        urls.push(`https://jsonplaceholder.typicode.com/todos/${i}`);
+      }
+
+      function request(opts, callback) {
+        fetch(opts.data)
+          .then((r) => r.json())
+          .then((data) => {
+            callback({ success: true, data });
+          })
+          .catch((data) => {
+            callback({ success: false, data });
+          });
+      }
+
+      ConcurrencyRequest.start(urls, { max: 3, request }).then((res) => {
+        console.log(res);
+      });
+    </script>
+  </body>
+</html>
